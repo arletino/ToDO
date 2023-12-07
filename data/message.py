@@ -4,6 +4,7 @@ class Message:
     '''Класс для создания сообщения'''
     new_mess = None
     __id = 0
+    name = 'default'
 
     def __init__(self, message: str, name = 'default') -> None:
         self.date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
@@ -26,12 +27,21 @@ class Message:
     def set_id(self, id):
         self.__id = id
     
-    def name(self, name):
-        self.name = f'{name} {self.__id}'
+    def set_name(self, name):
+        self.name = name
+    
+    def get_name(self):
+        return self.name
     
     def set_message(self, message):
         self.message = message
         self.date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
+
+    def get_dict_message(self):
+        message_dict = {"id": self.__id, "data_create": self.date_create, 
+                        "Name": self.name, "Body": self.message} 
+        return message_dict
+    
 
     def __str__(self):
         return f'{self.__id} {self.date_create} {self.name} \n {self.message}'
@@ -51,6 +61,12 @@ class List_messages:
             message.set_id(len(self.__list_messages))
             self.__list_messages.append(message)
     
-    def getList(self):
+    def get_list(self):
         return self.__list_messages
+    
+    def get_list_dict(self):
+        message_dict = []
+        for message in self.__list_messages:
+            message_dict.append(message.get_dict_message())
+        return message_dict
 
