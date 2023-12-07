@@ -10,15 +10,6 @@ def main():
     mess.set_message("sffdgdg")
     print(mess)
     mess2 = Message("rtytuyuiyt")
-<<<<<<< HEAD
-    print(mess2)
-    print()
-    lst = []
-    lst.append(mess)
-    lst.append(mess2)
-    for el in lst:
-        print(el)
-=======
     # mess2.set_id(1)
     print(mess2)
     lst = List_messages()
@@ -27,7 +18,6 @@ def main():
     lst.append(mess2)
     lst.append(mess3)
     print(lst.getList())
->>>>>>> main
 
 if __name__ == "__main__":
     main()
