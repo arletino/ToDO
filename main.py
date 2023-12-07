@@ -11,7 +11,7 @@ def main():
     mess.set_message("sffdgdg")
     print(mess)
     mess2 = Message("rtytuyuiyt")
-    print(mess)
+    print(mess2)
 
 if __name__ == "__main__":
     main()

@@ -5,7 +5,7 @@ class Message:
         self.id = id
         self.date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
         self.date_change = datetime.now().strftime("%d/%m/%y %H:%M:%S")
-        self,name = f'{name} {id}' 
+        self.name = f'{name} {id}' 
         self.message = message
     
     def get_id(self):
@@ -19,4 +19,4 @@ class Message:
         self.date_change = datetime.now().strftime("%d/%m/%y %H:%M:%S")
 
     def __str__(self):
-        return f'{self.id} {self.date_create} {self.date_change} \n {self.message}'
+        return f'{self.id} {self.date_create} {self.name} \n {self.message}'
