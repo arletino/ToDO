@@ -12,6 +12,12 @@ def main():
     print(mess)
     mess2 = Message("rtytuyuiyt")
     print(mess2)
+    print()
+    lst = []
+    lst.append(mess)
+    lst.append(mess2)
+    for el in lst:
+        print(el)
 
 if __name__ == "__main__":
     main()
