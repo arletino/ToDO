@@ -2,23 +2,24 @@ from datetime import datetime
 
 class Message:
     '''Класс для создания сообщения'''
-    new_mess = None
-    __id = 0
-    name = 'default'
+    __new_mess = None 
 
-    def __init__(self, message: str, name = 'default') -> None:
-        self.date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
-        if name == 'default':
-            self.name = f'{name} {self.new_mess}'
+    def __init__(self, body: str, name = '') -> None:
+        self.__id = 0    
+        self.__date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
+        self.__name = 'new note'
+        if name == '':
+            self.__name = f'{self.__name} {self.__new_mess}'
         else:
-            self.name = name
-        self.message = message
+            self.__name = name
+        self.__body = body
+    
 
     def __new__(cls, *args, **kwargs):
-        if cls.new_mess is not None and cls.name == 'default':
-            cls.new_mess += 1
+        if cls.__new_mess is not None and cls.__name == 'new note':
+            cls.__new_mess += 1
         else:
-            cls.new_mess = 0
+            cls.__new_mess = 0
         return super().__new__(cls)
     
     def get_id(self):
@@ -28,31 +29,28 @@ class Message:
         self.__id = id
     
     def set_name(self, name):
-        self.name = name
+        self.__name = name
     
     def get_name(self):
-        return self.name
+        return self.__name
     
     def set_message(self, message):
-        self.message = message
-        self.date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
+        self.__body = message
+        self.__date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
 
-    def get_dict_message(self):
-        message_dict = {"id": self.__id, "data_create": self.date_create, 
-                        "Name": self.name, "Body": self.message} 
-        return message_dict
-    
-
-    def __str__(self):
-        return f'{self.__id} {self.date_create} {self.name} \n {self.message}'
+    def __str__(self) -> str:
+        return str(self.__dict__)
     
     def __repr__(self) -> str:
-        return f'{self.__id} {self.date_create} {self.name} {self.message}'
+        return str(self.__dict__)
     
 class List_messages:
     '''Класс для создания списка заметок'''
     def __init__(self) -> None:
         self.__list_messages = []
+
+    def __repr__(self) -> str:
+        return self.__list_messages
         
     def append(self, message: Message):
         if not self.__list_messages:
@@ -64,9 +62,28 @@ class List_messages:
     def get_list(self):
         return self.__list_messages
     
-    def get_list_dict(self):
-        message_dict = []
-        for message in self.__list_messages:
-            message_dict.append(message.get_dict_message())
-        return message_dict
+    def check_kwargs(self, **kwargs):
+        if not kwargs:
+            return False
+        keys = self.__list_messages[0].keys()
+        len_keys = len(keys)
+        temp = dict(zip(self.__list_messages[0].keys(), ['']*len_keys))
+        return temp
+    
+    def filter_note(self, **kwargs):
+        print(List_messages.check_kwargs(kwargs))
+        # if not self.__list_messages:
+        #     print('List notes is empty')
+        #     return self.__list_messages
+        # elif  len(kwargs.keys()) > len(self.__list_messages[0].keys()):
+            
+        #     print("Input parameters not recognize")
+        #     parameters = dict(zip(self.__list_messages[0].keys(), []))
+        # else:
+        #     print()
+    
+    
+
+    
+             
 

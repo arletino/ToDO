@@ -19,14 +19,15 @@ def main():
     lst.append(mess)
     lst.append(mess2)
     lst.append(mess3)
+    print(type(lst))
     print(lst.get_list())
-    write_json(lst)
-    data = read_json()
-    print(type(data), data)
-    print()
-    write_csv(lst)
-    data1 = read_csv()
-    print(data1)
+    #write_json(lst)
+    # data = read_json()
+    # print(type(data), data)
+    # print()
+    # write_csv(lst)
+    # data1 = read_csv()
+    # print(data1)
     
 
 if __name__ == "__main__":
