@@ -1,9 +1,11 @@
-import csv
-from  import datatime
+from  datetime import datetime
 
-temp = {}
-with open('noname.csv', 'r', newline='') as file:
-        reader = csv.DictReader(file, delimiter=";",)
-        temp = next(reader)
+date1 = '12.02.23 12:03'
+date2 = '12.02.23 13:03:25'
 
-print(temp)
+
+temp1 = datetime.strptime(date1, "%d.%m.%y %H:%M:%S")
+temp2 =  datetime.strptime(date2, "%d.%m.%y %H:%M:%S")
+
+
+print(temp1 < temp2)

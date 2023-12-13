@@ -2,26 +2,17 @@ from datetime import datetime
 
 class Message:
     '''Класс для создания сообщения'''
-    __new_mess = None 
 
-    def __init__(self, body: str, name = '') -> None:
+    def __init__(self, body="empty message", name='default name') -> None:
         self.__id = 0    
         self.__date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
         self.__name = 'new note'
-        if name == '':
-            self.__name = f'{self.__name} {self.__new_mess}'
-        else:
-            self.__name = name
         self.__body = body
     
+    def get_dict(self):
+        return {'id':self.__id, 'date_create':self.__date_create, 
+                'name':self.__name, 'body':self.__body}
 
-    def __new__(cls, *args, **kwargs):
-        if cls.__new_mess is not None and cls.__name == 'new note':
-            cls.__new_mess += 1
-        else:
-            cls.__new_mess = 0
-        return super().__new__(cls)
-    
     def get_id(self):
         return self.__id
     
@@ -39,10 +30,10 @@ class Message:
         self.__date_create = datetime.now().strftime("%d/%m/%y %H:%M:%S")
 
     def __str__(self) -> str:
-        return str(self.__dict__)
+        return str(self.get_dict())
     
     def __repr__(self) -> str:
-        return str(self.__dict__)
+        return str(self.get_dict())
     
 class List_messages:
     '''Класс для создания списка заметок'''
@@ -50,7 +41,8 @@ class List_messages:
         self.__list_messages = []
 
     def __repr__(self) -> str:
-        return self.__list_messages
+        lst = self.__list_messages
+        return str(lst)
         
     def append(self, message: Message):
         if not self.__list_messages:
@@ -65,13 +57,18 @@ class List_messages:
     def check_kwargs(self, **kwargs):
         if not kwargs:
             return False
-        keys = self.__list_messages[0].keys()
+        message =  self.__list_messages[0].get_dict()
+        keys = message.keys()
+        print(keys)
         len_keys = len(keys)
-        temp = dict(zip(self.__list_messages[0].keys(), ['']*len_keys))
+        temp = dict(zip(keys, ['']*len_keys))
+        print(kwargs)
+        temp.update(kwargs)
+        print(temp)
         return temp
     
     def filter_note(self, **kwargs):
-        print(List_messages.check_kwargs(kwargs))
+        return self.check_kwargs(**kwargs)
         # if not self.__list_messages:
         #     print('List notes is empty')
         #     return self.__list_messages
