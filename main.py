@@ -1,32 +1,27 @@
-from data.message import Message, List_messages
-from service.json_read_write import read_json, write_json
-from service.csv_read_write import read_csv, write_csv
-from time import sleep
-
+from menu.menu_main import Main_menu
+from data.message import List_messages
+from time import sleep  
 
 def main():
-    mess = Message("fghhfd",)
+    list_messages_filtered = List_messages()
+    list_messages = List_messages()
+    main_menu = Main_menu(list_messages, list_messages_filtered)
+    print(intro_s)
+    quit = str(len(main_menu.menu) + 1)
+    while True:
+        print(f'Default path file = {main_menu.path}, Numbers notes in list= {len(main_menu.list_messages)}: ')
+        print(main_menu.main_menu)
+        action  = input('Input number action: ')
+        if action == quit:
+            break 
+        if action in main_menu.menu.keys():
+            main_menu.menu[action]()
+        else:
+            print('Wrong input')
+        sleep(0.3)
 
-    print(mess)
-    mess2 = Message("sdgdfgf")
-    print(mess2)
-    mess.set_message("sffdgdg")
-    print(mess)
-    lst = List_messages()
-    mess3 = Message("sdghnty", "Жкх")
-    lst.append(mess)
-    lst.append(mess2)
-    lst.append(mess3)
-    print(type(lst))
-    print(lst.filter_note(id=1, date_create='10.20.23'))
-    #write_json(lst)
-    # data = read_json()
-    # print(type(data), data)
-    # print()
-    # write_csv(lst)
-    # data1 = read_csv()
-    # print(data1)
-    
 
 if __name__ == "__main__":
+    intro_s = 'Программа для работы с заметками'
+
     main()

@@ -1,16 +1,24 @@
 import json
-from data.message import Message, List_messages
 from os import path
+from pathlib import Path
 
-def write_json(list_messages: List_messages, path='new_json.json'):
+
+def write_json(list_messages: dict, path='new_json.json', rewrite=False):
+    r_w = 'w' if rewrite else 'a'
+    if (path == ''): path = 'new_json.json'
     if list_messages:
-        ident = len(list_messages.get_list()[0].get_note().keys())    
-    data = json.dumps(list_messages.get_list(), indent=ident, ensure_ascii = False)
-    with open(path, "w", encoding='utf-8') as in_json:
+        ident = len(list_messages[0].keys())    
+    data = json.dumps(list_messages, indent=ident, ensure_ascii = False)
+    with open(path, r_w, encoding='utf-8') as in_json:
         json.dump(data, in_json, )
 
 def read_json(path='new_json.json'):
+    if (path == ''): path = 'new_json.json'
     with open(path, encoding='utf-8') as out_json:
-        temp = json.load(out_json)
-        data = json.loads(temp)
+        try:
+            temp = json.load(out_json)
+            data = json.loads(temp)
+        except:
+            print('Wrong format file')
     return data
+
