@@ -98,7 +98,7 @@ class Filter_menu:
             quit = str(len(self.menu_filter.keys()) + 1)
             while action != quit:
                 print(f'Lower filter border or equal {self.filter_dates.date_filter_lower}')
-                print(f'Upper filter Border {self.filter_dates.date_filter_upper}')
+                print(f'Upper filter border {self.filter_dates.date_filter_upper}')
                 print(f'Numbers notes in filter list= {len(self.list_messages_filtered)}')
                 for item in self.menu_filter_str:
                     print(item)
